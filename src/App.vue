@@ -4,26 +4,38 @@
       <Layout :style="{height: '100%'}">
         <Header :style="{position: 'fixed', width: '100%'}">
           <Menu mode="horizontal" :theme="theme" active-name="1">
-            <div class="layout-logo">
-              <img src="./assets/logo.png" v-bind:title="vueLogo">
+            <li class="layout-logo">
+              <router-link to="/"><img src="./assets/logo.png" v-bind:title="vueLogo"></router-link>
               <img src="../static/imgs/iview.png">
-              </div>
-            <ul class="layout-nav">
-              <menu-item name="1"><Icon type="ios-navigate"></Icon>Item 1 </menu-item>
-              <menu-item name="2"><Icon type="ios-keypad"></Icon>Item 2 </menu-item>
-              <menu-item name="3"><Icon type="ios-analytics"></Icon>Item 3 </menu-item>
-              <menu-item name="4"><Icon type="ios-paper"></Icon>Item 4 </menu-item>
-            </ul>
+            </li>
+            <li class="layout-nav">
+              <Menu mode="horizontal" :theme="theme" :style="{color: '#fff'}">
+                <menu-item name="1">
+                  <router-link to="/circle">
+                    <Icon type="ios-navigate"></Icon>graph
+                  </router-link>
+                </menu-item>
+                <menu-item name="2"><a><Icon type="ios-keypad"></Icon>Item 2</a></menu-item>
+                <menu-item name="3"><a><Icon type="ios-analytics"></Icon>Item 3</a></menu-item>
+                <menu-item name="4"><a><Icon type="ios-paper"></Icon>Item 4</a></menu-item>
+                <menu-item>
+                  <ButtonGroup>
+                    <Button type="ghost" class="lan-btn">中文</Button>
+                    <Button type="ghost" class="lan-btn">英文</Button>
+                  </ButtonGroup>
+                </menu-item>
+              </Menu>
+            </li>
           </Menu>
         </Header>
         <Layout :style="{'margin-top': '64px'}">
           <Sider ref="side1" hide-trigger collapsible :collapsed-width="78" v-model="isCollapsed" :style="{'background-color': '#fff'}">
-            <Menu active-name="1-2" theme="light" width="auto" :open-names="['1']" :class="menuitemClasses">
+            <Menu active-name="1-1" theme="light" width="auto" :open-names="['1']" :class="menuitemClasses">
               <Submenu name="1">
                 <template slot="title">
-                  <Icon type="ios-navigate"></Icon> <span>Item 1</span>
+                  <Icon type="ios-navigate"></Icon> <span>graph</span>
                 </template>
-                <menu-item name="1-1">Option 1 </menu-item>
+                <menu-item name="1-1"><router-link to="/circle">circle</router-link></menu-item>
                 <menu-item name="1-2">Option 2 </menu-item>
                 <menu-item name="1-3">Option 3 </menu-item>
               </Submenu>
@@ -117,10 +129,16 @@ export default {
     height: 100%;
   }
   .layout-nav{
-    width: 420px;
     margin: 0 auto;
     margin-right: 20px;
     color: #fff;
+    float: right;
+  }
+  .layout-nav a {
+    color: #fff;
+  }
+  .layout-nav a:hover {
+    color: #57a3f3;
   }
   .menu-icon{
     transition: all .3s;
@@ -163,5 +181,9 @@ export default {
   }
   .collapsed-menu .ivu-menu-opened > * > .ivu-menu-submenu-title-icon {
     transform: rotate(180deg) translateX(-50%);
+  }
+  .lan-btn {
+    color: #fff;
+    border-color: #fff;
   }
 </style>
